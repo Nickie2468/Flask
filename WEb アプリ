@@ -1,0 +1,19 @@
+!pip install flask pyngrok
+import os
+from flask import Flask
+from pyngrok import ngrok, conf
+
+conf.get_default().auth_token = "My token "
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "honodesu~"
+
+
+if __name__ == "__main__":
+   public_url = ngrok.connect(5000)
+   print(f"ngrok URL: {public_url}")
+
+   app.run(port=5000)
